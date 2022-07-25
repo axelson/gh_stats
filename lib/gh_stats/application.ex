@@ -10,6 +10,7 @@ defmodule GhStats.Application do
     children = [
       # Start the Ecto repository
       GhStats.Repo,
+      {Oban, Application.fetch_env!(:gh_stats, Oban)},
       # Start the Telemetry supervisor
       GhStatsWeb.Telemetry,
       # Start the PubSub system
