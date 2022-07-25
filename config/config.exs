@@ -49,7 +49,17 @@ config :phoenix, :json_library, Jason
 
 config :gh_stats, Oban,
   repo: GhStats.Repo,
-  plugins: [Oban.Plugins.Pruner],
+  plugins: [
+    Oban.Plugins.Pruner,
+    {Oban.Plugins.Cron,
+     crontab: [
+       # {"* * * * *", MyApp.MinuteWorker},
+       {"0 * * * *", GhStats.PollGitHubWorker, args: %{custom: "arg"}},
+       # {"0 0 * * *", MyApp.DailyWorker, max_attempts: 1},
+       # {"0 12 * * MON", MyApp.MondayWorker, queue: :scheduled, tags: ["mondays"]},
+       # {"@daily", MyApp.AnotherDailyWorker}
+     ]}
+  ],
   queues: [default: 10]
 
 # Import environment specific config. This must remain at the bottom
