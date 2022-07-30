@@ -1,19 +1,15 @@
 # GhStats
 
-To start your Phoenix server:
+Periodically polls GitHub collecting stats about a GitHub repository (or multiple repositories)
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+The stats can be used to understand the historical trends of Pull Requests such as:
+- How long are Pull Requests typically waiting for review?
+- Which developers Pull Requests wait the longest for review
+- Which developers are reviewing the most Pull Requests
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## How it works
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- `PollGitHubWorker` runs every minute (hour) and polls GitHub to get the status of PRs
+  - Stats are stored in Postgres
+- `/api` simple JSON REST api
+- Basic Phoenix UI to display stats
