@@ -33,11 +33,15 @@ defmodule GhStats.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:dotenv_parser, "~> 2.0", only: :dev},
       {:ecto_sql, "~> 3.6"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:exsync, path: "~/dev/forks/exsync", only: :dev},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
+      {:machete, "~> 0.2.1", only: :test},
+      {:neuron, "~> 5.0"},
       {:oban, "~> 2.13"},
       {:phoenix, "~> 1.6.11"},
       {:phoenix_ecto, "~> 4.4"},

@@ -1,5 +1,9 @@
 import Config
 
+if config_env() == :dev do
+  DotenvParser.load_file(".env")
+end
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
@@ -19,6 +23,8 @@ import Config
 if System.get_env("PHX_SERVER") do
   config :gh_stats, GhStatsWeb.Endpoint, server: true
 end
+
+config :gh_stats, gh_token: System.get_env("GH_STATS_GH_TOKEN")
 
 if config_env() == :prod do
   database_url =
