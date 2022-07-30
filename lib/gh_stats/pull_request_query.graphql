@@ -1,17 +1,7 @@
-TODO:
-- [x] Neuron run query
-- [x] Run the actual query
-- [ ] Create db schema
-- [ ] Worker should run query and save result to the DB
-- [ ] sparkline will have a set width and try to fill it up with whatever data we have but maxing out at a set amount of data points for each sparkline
-
-https://docs.github.com/en/graphql/overview/explorer
-
-```graphql
 query {
   repository(name: "felt", owner: "felt") {
     pullRequests(
-      last: 8
+      last: 2
       orderBy: {field: CREATED_AT, direction: ASC}
       states: [OPEN]
     ) {
@@ -93,31 +83,3 @@ query {
     }
   }
 }
-```
-
-```graphql
-{
-  viewer {
-    login
-  }
-  repository(name: "felt", owner: "felt") {
-    pullRequests(
-      first: 100
-      orderBy: {field: CREATED_AT, direction: ASC}
-      states: [OPEN]
-    ) {
-      totalCount
-      edges {
-        node {
-          title
-          isDraft
-          author {
-            login
-          }
-          reviewDecision
-        }
-      }
-    }
-  }
-}
-```
