@@ -1,6 +1,24 @@
 defmodule GhStats do
-  def demo do
-    Neuron.Config.set(url: "https://api.github.com/graphql")
+  alias GhStats.StatsQuery
+
+  def run do
+    {:ok, result} = demo_query()
+    changeset = GhStats.QueryResult.changeset(%GhStats.QueryResult{}, %{json: result.body})
+    GhStats.Repo.insert(changeset)
+  end
+
+  def run_stats_query do
+    query = File.read!(Path.join([__DIR__, "gh_stats/queries/stats_query.graphql"]))
+    run_query(query)
+  end
+
+  def run_and_save_stats_query do
+    {:ok, response} = StatsQuery.run_query()
+    changeset = StatsQuery.response_to_changeset(response)
+    GhStats.Repo.insert(changeset)
+  end
+
+  def demo_query do
     query = File.read!(Path.join([__DIR__, "gh_stats/pull_request_query.graphql"]))
     run_query(query)
   end
@@ -22,7 +40,9 @@ defmodule GhStats do
     )
   end
 
-  defp run_query(query) do
+  def run_query(query) do
+    Neuron.Config.set(url: "https://api.github.com/graphql")
+
     Neuron.query(
       query,
       %{},

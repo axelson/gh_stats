@@ -1,0 +1,35 @@
+query {
+  repository(name: "felt", owner: "felt") {
+    pullRequests(
+      last: 100
+      orderBy: {field: CREATED_AT, direction: ASC}
+      states: [OPEN]
+    ) {
+      totalCount
+      edges {
+        node {
+          title
+          merged
+          mergeable
+          number
+          url
+          isDraft
+          author {
+            login
+          }
+          reviewRequests(first: 20) {
+            nodes {
+              asCodeOwner
+              requestedReviewer {
+                ... on User {
+                  login
+                }
+              }
+            }
+          }
+          reviewDecision
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,9 @@
 TODO:
 - [x] Neuron run query
 - [x] Run the actual query
-- [ ] Create db schema
+- [x] Create db schema
 - [ ] Worker should run query and save result to the DB
+- [ ] First API
 - [ ] sparkline will have a set width and try to fill it up with whatever data we have but maxing out at a set amount of data points for each sparkline
 
 https://docs.github.com/en/graphql/overview/explorer

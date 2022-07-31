@@ -10,6 +10,11 @@ import Config
 config :gh_stats,
   ecto_repos: [GhStats.Repo]
 
+config :gh_stats, :generators,
+  migration: true,
+  binary_id: true,
+  sample_binary_id: "11111111-1111-1111-1111-111111111111"
+
 # Configures the endpoint
 config :gh_stats, GhStatsWeb.Endpoint,
   url: [host: "localhost"],
@@ -54,7 +59,7 @@ config :gh_stats, Oban,
     {Oban.Plugins.Cron,
      crontab: [
        # {"* * * * *", MyApp.MinuteWorker},
-       {"0 * * * *", GhStats.PollGitHubWorker, args: %{custom: "arg"}},
+       {"* * * * *", GhStats.PollGitHubWorker, args: %{}},
        # {"0 0 * * *", MyApp.DailyWorker, max_attempts: 1},
        # {"0 12 * * MON", MyApp.MondayWorker, queue: :scheduled, tags: ["mondays"]},
        # {"@daily", MyApp.AnotherDailyWorker}
