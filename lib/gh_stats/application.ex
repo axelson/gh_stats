@@ -10,17 +10,13 @@ defmodule GhStats.Application do
     Ecto.DevLogger.install(GhStats.Repo)
 
     children = [
-      # Start the Ecto repository
       GhStats.Repo,
       {Oban, Application.fetch_env!(:gh_stats, Oban)},
-      # Start the Telemetry supervisor
       GhStatsWeb.Telemetry,
-      # Start the PubSub system
       {Phoenix.PubSub, name: GhStats.PubSub},
-      # Start the Endpoint (http/https)
-      GhStatsWeb.Endpoint
-      # Start a worker by calling: GhStats.Worker.start_link(arg)
-      # {GhStats.Worker, arg}
+      GhStatsWeb.Endpoint,
+      # This should be last so that systemd knows when the full application is ready
+      GhStats.SystemdReadyWorker
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

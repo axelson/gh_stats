@@ -1,0 +1,32 @@
+# For Ubuntu install with
+# cp gh_stats.service /lib/systemd/system
+# systemctl enable gh_stats.service
+# sudo service gh_stats start
+
+[Unit]
+Description=Gen Tracker
+After=network.target
+
+[Service]
+User=jason
+Group=jason
+# This will allow using `systemd:notify/1` for informing the system supervisor
+# about application status.
+Type=notify
+# Application need to start in foreground instead of forking into background,
+# otherwise it may be not correctly detected and system will try to start it
+# again.
+ExecStart=/home/jason/gh_stats/_build/prod/rel/gh_stats/bin/gh_stats start
+EnvironmentFile=/home/jason/gh_stats/.env
+# Enable watchdog process, which will expect messages in given timeframe,
+# otherwise it will restart the process as a defunct. It should be managed
+# automatically by `systemd` application in most cases and will send messages
+# twice as often as requested.
+#
+# You can force failure by using `systemd:watchdog(trigger)` or manually ping
+# systemd watchdog via `systemd:watchdog(ping)`.
+WatchdogSec=10s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

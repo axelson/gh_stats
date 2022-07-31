@@ -24,3 +24,12 @@ Assumes that we're only interested in reviews for non-draft PRs
   - Stats are stored in Postgres
 - `/api` simple JSON REST api
 - Basic Phoenix UI to display stats
+
+## Installation
+
+The preferred method of installation is via systemd
+
+- Clone repository to ~/gh_stats
+- Populate ~/gh_stats/.env
+- Install gh_stats.service by following priv/gh_stats.service (customizing paths
+  as necessary)
