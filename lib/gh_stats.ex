@@ -18,6 +18,17 @@ defmodule GhStats do
     GhStats.Repo.insert(changeset)
   end
 
+  def fetch_stats(limit \\ 60 * 24 * 14) do
+    import Ecto.Query
+
+    query =
+      from s in GhStats.SummaryStats,
+        order_by: {:desc, s.inserted_at},
+        limit: ^limit
+
+    GhStats.Repo.all(query)
+  end
+
   def demo_query do
     query = File.read!(Path.join([__DIR__, "gh_stats/pull_request_query.graphql"]))
     run_query(query)

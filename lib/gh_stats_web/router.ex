@@ -21,9 +21,10 @@ defmodule GhStatsWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", GhStatsWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", GhStatsWeb do
+    pipe_through :api
+    get "/stats.csv", StatsController, :stats
+  end
 
   # Enables LiveDashboard only for development
   #

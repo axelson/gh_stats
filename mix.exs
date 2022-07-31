@@ -43,6 +43,7 @@ defmodule GhStats.MixProject do
       {:jason, "~> 1.2"},
       {:machete, "~> 0.2.1", only: :test},
       {:neuron, "~> 5.0"},
+      {:nimble_csv, "~> 1.2"},
       {:oban, "~> 2.13"},
       {:phoenix, "~> 1.6.11"},
       {:phoenix_ecto, "~> 4.4"},
