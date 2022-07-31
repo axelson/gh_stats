@@ -4,7 +4,7 @@
 # sudo service gh_stats start
 
 [Unit]
-Description=Gen Tracker
+Description=GH Stats
 After=network.target
 
 [Service]
