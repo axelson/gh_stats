@@ -1,5 +1,5 @@
 # For Ubuntu install with
-# cp gh_stats.service /lib/systemd/system
+# cp gh_stats.service /lib/systemd/system/
 # systemctl enable gh_stats.service
 # sudo service gh_stats start
 

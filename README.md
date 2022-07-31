@@ -33,3 +33,6 @@ The preferred method of installation is via systemd
 - Populate ~/gh_stats/.env
 - Install gh_stats.service by following priv/gh_stats.service (customizing paths
   as necessary)
+- mix release --overwrite
+- mix phx.digest
+- mix assets.deploy
