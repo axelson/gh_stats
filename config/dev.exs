@@ -8,7 +8,9 @@ config :gh_stats, GhStats.Repo,
   database: "gh_stats_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  # We log via EctoDevLogger instead
+  log: false
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

@@ -7,6 +7,8 @@ defmodule GhStats.Application do
 
   @impl true
   def start(_type, _args) do
+    Ecto.DevLogger.install(GhStats.Repo)
+
     children = [
       # Start the Ecto repository
       GhStats.Repo,

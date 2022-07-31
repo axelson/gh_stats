@@ -34,6 +34,7 @@ defmodule GhStats.MixProject do
   defp deps do
     [
       {:dotenv_parser, "~> 2.0", only: :dev},
+      {:ecto_dev_logger, "~> 0.4.1"},
       {:ecto_sql, "~> 3.6"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
       {:exsync, path: "~/dev/forks/exsync", only: :dev},
